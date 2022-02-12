@@ -9,9 +9,9 @@ public enum Arma {
     ARCO("Arco"),
     BESTA("Besta"),
     CAJADO("Cajado"),
-    LIVROMAGIAS("Livro de Magias"),
+    LIVRO_MAGIAS("Livro de Magias"),
     ARMADILHA("Armadilha"),
-    MACHADODUPLO("Machado Duplo");
+    MACHADO_DUPLO("Machado Duplo");
 
     private final String nome;
 
