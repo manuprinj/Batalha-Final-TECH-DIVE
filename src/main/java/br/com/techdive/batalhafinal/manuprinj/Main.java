@@ -22,6 +22,10 @@ public class Main {
         System.out.println("F - Feminino ");
         System.out.println("M - Masculino");
         String sexoPersonagem = getString("Digite o gênero do(a) personagem (F/M): ");
+        if (!(sexoPersonagem.equals("M") || sexoPersonagem.equals("F"))) {
+            System.out.println("Sexo inválido");
+            return;
+        }
 
         System.out.println("Digite que tipo de personagem você deseja criar: ");
         System.out.println("1 - Guerreiro");
@@ -32,43 +36,15 @@ public class Main {
 
         Jogador personagem = null;
 
+        Arma arma = getArma();
+
         if (tipoPersonagem == 1) {
-            System.out.println("Selecione a arma do personagem:");
-            for (Arma value : Arma.values()) {
-                System.out.println(value.ordinal() + 1 + " - " + value.getNome());
-            }
-            int opcaoArma = getInt() - 1;
-            Arma arma = Arma.values()[opcaoArma];
             personagem = new Guerreiro(nomePersonagem, sexoPersonagem, arma);
-        }
-
-        if (tipoPersonagem == 2) {
-            System.out.println("Selecione a arma do personagem:");
-            for (Arma value : Arma.values()) {
-                System.out.println(value.ordinal() + 1 + " - " + value.getNome());
-            }
-            int opcaoArma = getInt() - 1;
-            Arma arma = Arma.values()[opcaoArma];
+        } else if (tipoPersonagem == 2) {
             personagem = new Paladino(nomePersonagem, sexoPersonagem, arma);
-        }
-
-        if (tipoPersonagem == 3) {
-            System.out.println("Selecione a arma do personagem:");
-            for (Arma value : Arma.values()) {
-                System.out.println(value.ordinal() + 1 + " - " + value.getNome());
-            }
-            int opcaoArma = getInt() - 1;
-            Arma arma = Arma.values()[opcaoArma];
+        } else if (tipoPersonagem == 3) {
             personagem = new Arqueiro(nomePersonagem, sexoPersonagem, arma);
-        }
-
-        if (tipoPersonagem == 4) {
-            System.out.println("Selecione a arma do personagem:");
-            for (Arma value : Arma.values()) {
-                System.out.println(value.ordinal() + 1 + " - " + value.getNome());
-            }
-            int opcaoArma = getInt() - 1;
-            Arma arma = Arma.values()[opcaoArma];
+        } else if (tipoPersonagem == 4) {
             personagem = new Mago(nomePersonagem, sexoPersonagem, arma);
         }
 
@@ -234,6 +210,15 @@ public class Main {
         System.out.println("Você se levanta, olha para os prisioneiros, vai de um em um e os liberta,\n"
                 + "e todos vocês saem em direção à noite, retornando à cidade.\n"
                 + "Seu dever está cumprido.");
+    }
+
+    private static Arma getArma() {
+        System.out.println("Selecione a arma do personagem:");
+        for (Arma value : Arma.values()) {
+            System.out.println(value.ordinal() + 1 + " - " + value.getNome());
+        }
+        int opcaoArma = getInt() - 1;
+        return Arma.values()[opcaoArma];
     }
 
     private void combate(/* parâmetros */) {
