@@ -19,7 +19,6 @@ public class Armadilha implements Atacante {
     @Override
     public void atacar(Personagem referencia) {
         int rolamentoDado = new Random().nextInt(10) + 1;
-        System.out.println(rolamentoDado);
 
         int dano = rolamentoDado + pontosDeAtaque - referencia.getPontosDefesa();
         if (rolamentoDado == 1 || dano <= 0) {

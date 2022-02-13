@@ -30,16 +30,43 @@ public abstract class Jogador extends Personagem implements Atacante {
 
     @Override
     public void atacar(Personagem referencia) {
-        int rolamentoDado = new Random().nextInt(10) + 1;
-        System.out.println(rolamentoDado);
+        int rolamentoDado = new Random().nextInt(20) + 1;
 
-        int dano = rolamentoDado + getPontosAtaque() - referencia.getPontosDefesa();
-        if (rolamentoDado == 1 || dano <= 0) {
-            System.out.println("O ataque da armadilha pegou de raspão e você não sofreu dano.");
-        } else {
-            referencia.setPontosSaude(referencia.getPontosSaude() - dano);
-            System.out.printf("Você sofreu %s de dano e agora possui %s pontos de vida.%n", dano, referencia.getPontosSaude());
+        int dano = rolamentoDado + getPontosAtaque();
+        if (rolamentoDado != 20) {
+            dano -= referencia.getPontosDefesa();
         }
+
+        if (rolamentoDado == 1 || dano <= 0) {
+            System.out.println("Você errou seu ataque! O inimigo não sofreu dano algum.");
+        } else {
+            if (rolamentoDado == 20) {
+                System.out.println("Você acertou um ataque crítico!");
+            }
+
+            referencia.setPontosSaude(referencia.getPontosSaude() - dano);
+            System.out.printf("Você atacou %s e causou %s de dano no inimigo.%n", getComplementoArma(), dano);
+        }
+    }
+
+    private String getComplementoArma() {
+        switch (arma) {
+            case CLAVA:
+            case ESPADA:
+                return "com sua " + arma.getNome();
+            case MACHADO:
+            case MARTELO:
+                return "com seu " + arma.getNome();
+            case ARCO:
+                return "com seu arco, a flecha atingiu";
+            case BESTA:
+                return "com sua besta, o virote atingiu";
+            case CAJADO:
+                return "com seu cajado, lançando uma bola de fogo";
+            case LIVRO_MAGIAS:
+                return "absorvendo energia do livro com uma mão e liberando com a outra";
+        }
+        return "";
     }
 
     public String getNome() {

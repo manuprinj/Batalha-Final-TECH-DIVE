@@ -8,6 +8,7 @@ import br.com.techdive.batalhafinal.manuprinj.classesdecombate.Arqueiro;
 import br.com.techdive.batalhafinal.manuprinj.classesdecombate.Guerreiro;
 import br.com.techdive.batalhafinal.manuprinj.classesdecombate.Mago;
 import br.com.techdive.batalhafinal.manuprinj.classesdecombate.Paladino;
+import br.com.techdive.batalhafinal.manuprinj.inimigos.Armeiro;
 import br.com.techdive.batalhafinal.manuprinj.types.Arma;
 import br.com.techdive.batalhafinal.manuprinj.types.Motivacao;
 
@@ -162,6 +163,36 @@ public class Main {
 
         // TODO: instanciar objeto Armeiro
         // TODO: iniciar loop de combate, inimigo ataca primeiro
+        Armeiro armeiro = new Armeiro();
+        while (armeiro.getPontosSaude() > 0) {
+            armeiro.atacar(personagem);
+
+            if (personagem.getPontosSaude() <= 0) {
+                System.out.println("Você não estava preparado para a força do inimigo.");
+                if (personagem.getMotivacao().equals(Motivacao.VINGANCA)) {
+                    System.out.println("Não foi possível concluir sua vingança, e agora resta saber se alguém se vingará por você.");
+                } else if (personagem.getMotivacao().equals(Motivacao.GLORIA)) {
+                    if (personagem.getSexo().equals("F")) {
+                        System.out.println("A glória que buscavas não será sua, e a cidade aguarda por sua próxima heroína");
+                    } else {
+                        System.out.println("A glória que buscavas não será sua, e a cidade aguarda por seu próximo herói");
+                    }
+                }
+                return;
+            }
+
+            System.out.println("1 - Atacar");
+            System.out.println("2 - Fugir");
+            tipoOperacao = getInt();
+
+            if (tipoOperacao == 2) {
+                System.out.println("Você não estava preparado para a força do inimigo, e decide fugir para que possa tentar novamente em uma próxima vez");
+                return;
+            }
+            personagem.atacar(armeiro);
+        }
+        System.out.println("O inimigo não é páreo para o seu heroísmo, e jaz imóvel aos seus pés.");
+
 
         System.out.println("Após derrotar o Armeiro, você percebe que seus equipamentos estão muito danificados.\n"
                 + "Olha em volta, encarando todas aquelas peças de armaduras resistentes e em ótimo estado.");
