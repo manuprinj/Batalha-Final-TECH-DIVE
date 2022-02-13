@@ -96,10 +96,16 @@ public class Main {
         }
 
         // TODO: perguntar ao jogador se o personagem segue em frente ou desiste
-        // TODO: if (desiste)
-        System.out.println("O medo invade o seu coração e você sente que ainda não está à altura do desafio.\n"
-                + "Você se volta para a noite lá fora, e corre em direção à segurança.");
-        // TODO: encerrar a execução do programa: System.exit(0);
+        System.out.println("Você deseja:");
+        System.out.println("1 - Seguir em frente");
+        System.out.println("2 - Desistir");
+        int tipoOperacao = getInt();
+
+        if (tipoOperacao == 2) {
+            System.out.println("O medo invade o seu coração e você sente que ainda não está à altura do desafio.\n"
+                    + "Você se volta para a noite lá fora, e corre em direção à segurança.");
+            System.exit(0);
+        }
 
         System.out.println("Você caminha, atento a todos os seus sentidos, por vários metros,\n"
                 + "até visualizar a frente uma fonte de luz, que você imagina ser a chama de uma tocha,\n"
@@ -107,23 +113,31 @@ public class Main {
 
         System.out.println("Você se pergunta se dentro dessa sala pode haver inimigos, ou alguma armadilha,\n"
                 + "e pondera sobre como passar pela porta.");
+
         // TODO: perguntar ao jogador se deseja passar pela porta ANDANDO CUIDADOSAMENTE, CORRENDO ou SALTANDO.
-        // TODO: if SALTANDO
-        System.out.println("Você se concentra e pula em direção à luz, saltando de antes da porta até o interior da sala.");
-        // TODO: else if CORRENDO
-        System.out.println("Você respira fundo e desata a correr em direção à sala.\n"
-                + "Quando passa pela porta, sente que pisou em uma pedra solta,\n"
-                + "mas não dá muita importância e segue para dentro da sala, olhando ao redor à procura de inimigos.\n"
-                + "Não tem ninguém, mas você ouve sons de flechas batendo na pedra atrás de você,\n"
-                + "e quando se vira, vê várias flechas no chão.\n"
-                + "Espiando pela porta, você entende que pisou em uma armadilha que soltou flechas de uma escotilha aberta no teto,\n"
-                + "mas por sorte você entrou correndo e conseguiu escapar desse ataque surpresa.");
-        // TODO: else
-        System.out.println("Você toma cuidado e vai caminhando vagarosamente em direção à luz.\n"
-                + "Quando você pisa exatamente embaixo da porta, você sente o chão ceder levemente, como se tivesse pisado em uma pedra solta.\n"
-                + "Você ouve um ruído de mecanismos se movimentando, e uma escotilha se abre no teto atrás de você, no corredor.\n"
-                + "Flechas voam da escotilha em sua direção, e você salta para dentro da sala, porém uma delas te acerta na perna.");
-        //TODO: instanciar objeto Armadilha e invocar método de causar dano.
+        System.out.println("Você deseja passar pela porta:");
+        System.out.println("1 - Andando Cuidadosamente");
+        System.out.println("2 - Correndo");
+        System.out.println("3 - Saltando");
+        tipoOperacao = getInt();
+
+        if (tipoOperacao == 1) {
+            System.out.println("Você se concentra e pula em direção à luz, saltando de antes da porta até o interior da sala.");
+        } else if (tipoOperacao == 2){
+            System.out.println("Você respira fundo e desata a correr em direção à sala.\n"
+                    + "Quando passa pela porta, sente que pisou em uma pedra solta,\n"
+                    + "mas não dá muita importância e segue para dentro da sala, olhando ao redor à procura de inimigos.\n"
+                    + "Não tem ninguém, mas você ouve sons de flechas batendo na pedra atrás de você,\n"
+                    + "e quando se vira, vê várias flechas no chão.\n"
+                    + "Espiando pela porta, você entende que pisou em uma armadilha que soltou flechas de uma escotilha aberta no teto,\n"
+                    + "mas por sorte você entrou correndo e conseguiu escapar desse ataque surpresa.");
+        } else {
+            System.out.println("Você toma cuidado e vai caminhando vagarosamente em direção à luz.\n" + "Quando você pisa exatamente embaixo da porta, você sente o chão ceder levemente, como se tivesse pisado em uma pedra solta.\n"
+                    + "Você ouve um ruído de mecanismos se movimentando, e uma escotilha se abre no teto atrás de você, no corredor.\n"
+                    + "Flechas voam da escotilha em sua direção, e você salta para dentro da sala, porém uma delas te acerta na perna.");
+            Armadilha armadilha  = new Armadilha();
+            armadilha.atacar(personagem);
+        }
 
         System.out.println("Você se encontra sozinho em uma sala quadrada, contendo uma porta em cada parede.\n"
                 + "Uma delas foi aquela pela qual você entrou, que estava aberta, e as outras três estão fechadas.\n"
@@ -145,6 +159,7 @@ public class Main {
                 + "Ali, de pé entre você e a porta fechada, bloqueando o caminho do seu destino, está um dos capitães do inimigo.\n"
                 + "Um orque horrendo, de armadura, capacete e espada em punho, em posição de combate.\n"
                 + "Ele avança em sua direção.");
+
         // TODO: instanciar objeto Armeiro
         // TODO: iniciar loop de combate, inimigo ataca primeiro
 
