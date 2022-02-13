@@ -8,7 +8,9 @@ import br.com.techdive.batalhafinal.manuprinj.classesdecombate.Arqueiro;
 import br.com.techdive.batalhafinal.manuprinj.classesdecombate.Guerreiro;
 import br.com.techdive.batalhafinal.manuprinj.classesdecombate.Mago;
 import br.com.techdive.batalhafinal.manuprinj.classesdecombate.Paladino;
+import br.com.techdive.batalhafinal.manuprinj.inimigos.Alquimista;
 import br.com.techdive.batalhafinal.manuprinj.inimigos.Armeiro;
+import br.com.techdive.batalhafinal.manuprinj.inimigos.Lider;
 import br.com.techdive.batalhafinal.manuprinj.types.Arma;
 import br.com.techdive.batalhafinal.manuprinj.types.Motivacao;
 
@@ -96,7 +98,6 @@ public class Main {
                     + "À sua frente, só é possível perceber que você se encontra em um corredor extenso.\n" + "Você só pode ir à frente, ou desistir.");
         }
 
-        // TODO: perguntar ao jogador se o personagem segue em frente ou desiste
         System.out.println("Você deseja:");
         System.out.println("1 - Seguir em frente");
         System.out.println("2 - Desistir");
@@ -115,7 +116,6 @@ public class Main {
         System.out.println("Você se pergunta se dentro dessa sala pode haver inimigos, ou alguma armadilha,\n"
                 + "e pondera sobre como passar pela porta.");
 
-        // TODO: perguntar ao jogador se deseja passar pela porta ANDANDO CUIDADOSAMENTE, CORRENDO ou SALTANDO.
         System.out.println("Você deseja passar pela porta:");
         System.out.println("1 - Andando Cuidadosamente");
         System.out.println("2 - Correndo");
@@ -161,50 +161,24 @@ public class Main {
                 + "Um orque horrendo, de armadura, capacete e espada em punho, em posição de combate.\n"
                 + "Ele avança em sua direção.");
 
-        // TODO: instanciar objeto Armeiro
-        // TODO: iniciar loop de combate, inimigo ataca primeiro
         Armeiro armeiro = new Armeiro();
-        while (armeiro.getPontosSaude() > 0) {
-            armeiro.atacar(personagem);
-
-            if (personagem.getPontosSaude() <= 0) {
-                System.out.println("Você não estava preparado para a força do inimigo.");
-                if (personagem.getMotivacao().equals(Motivacao.VINGANCA)) {
-                    System.out.println("Não foi possível concluir sua vingança, e agora resta saber se alguém se vingará por você.");
-                } else if (personagem.getMotivacao().equals(Motivacao.GLORIA)) {
-                    if (personagem.getSexo().equals("F")) {
-                        System.out.println("A glória que buscavas não será sua, e a cidade aguarda por sua próxima heroína");
-                    } else {
-                        System.out.println("A glória que buscavas não será sua, e a cidade aguarda por seu próximo herói");
-                    }
-                }
-                return;
-            }
-
-            System.out.println("1 - Atacar");
-            System.out.println("2 - Fugir");
-            tipoOperacao = getInt();
-
-            if (tipoOperacao == 2) {
-                System.out.println("Você não estava preparado para a força do inimigo, e decide fugir para que possa tentar novamente em uma próxima vez");
-                return;
-            }
-            personagem.atacar(armeiro);
-        }
-        System.out.println("O inimigo não é páreo para o seu heroísmo, e jaz imóvel aos seus pés.");
-
+        combate(personagem, armeiro);
 
         System.out.println("Após derrotar o Armeiro, você percebe que seus equipamentos estão muito danificados.\n"
                 + "Olha em volta, encarando todas aquelas peças de armaduras resistentes e em ótimo estado.");
 
-        // TODO: perguntar ao jogador se ele quer ou não pegar as armaduras novas.
-        // TODO: Se escolher pegar
-        System.out.println("Você resolve usar os equipamentos do inimigo contra ele, e trocar algumas peças suas,\n"
-                + "que estavam danificadas, pelas peças de armaduras existentes na sala.\n"
-                + "De armadura nova, você se sente mais protegido para os desafios à sua frente.");
-        // TODO: deve ser acrescentado +5 pontos de defesa para o jogador.
-        // TODO: se não
-        System.out.println("Você decide que não precisa utilizar nada que venha das mãos do inimigo.");
+        System.out.println("Você deseja pegar as armaduras nova?");
+        System.out.println("1 - Sim");
+        System.out.println("2 - Não");
+        tipoOperacao = getInt();
+
+        if (tipoOperacao == 1) {
+            System.out.println("Você resolve usar os equipamentos do inimigo contra ele, e trocar algumas peças suas,\n"
+                    + "que estavam danificadas, pelas peças de armaduras existentes na sala.\n" + "De armadura nova, você se sente mais protegido para os desafios à sua frente.");
+            personagem.setPontosDefesa(personagem.getPontosDefesa() + 5);
+        } else {
+            System.out.println("Você decide que não precisa utilizar nada que venha das mãos do inimigo.");
+        }
 
         System.out.println("Em uma mesa, você encontra uma chave dourada, e sabe que aquela chave abre uma das fechaduras da porta do líder inimigo.\n"
                 + "Você pega a chave e guarda numa pequena bolsa que leva presa ao cinto.");
@@ -218,18 +192,24 @@ public class Main {
                 + "criando poções utilizadas pelos soldados para aterrorizar a região.");
         System.out.println("No fundo da sala, olhando em sua direção, está outro dos capitães do inimigo.\n"
                 + "Um orque horrendo, de armadura, cajado em punho, em posição de combate. Ele avança em sua direção.");
-        // TODO: instanciar objeto Alquimista
-        // TODO: iniciar loop de combate, inimigo ataca primeiro
+
+        Alquimista alquimista = new Alquimista();
+        combate(personagem, alquimista);
 
         System.out.println("Após derrotar o Alquimista, você olha em volta, tentando reconhecer alguma poção do estoque do inimigo.\n"
                 + "Em uma mesa, você reconhece uma pequena garrafa de vidro contendo um líquido levemente rosado,\n"
                 + "pega a garrafa e pondera se deve beber um gole.");
-        // TODO: perguntar ao jogador se ele quer ou não beber.
-        // TODO: Se escolher beber
-        System.out.println("Você se sente revigorado para seguir adiante!");
-        // TODO: pontos de saúde do jogador devem ser restaurados 100%
-        // TODO: se não
-        System.out.println("Você fica receoso de beber algo produzido pelo inimigo.");
+        System.out.println("Você deseja beber?");
+        System.out.println("1 - Sim");
+        System.out.println("2 - Não");
+        tipoOperacao = getInt();
+
+        if (tipoOperacao == 1) {
+            System.out.println("Você se sente revigorado para seguir adiante!");
+            personagem.setPontosSaude(Jogador.SAUDE_MAXIMA);
+        } else {
+            System.out.println("Você fica receoso de beber algo produzido pelo inimigo.");
+        }
 
         System.out.println("Ao lado da porta, você vê uma chave dourada em cima de uma mesa,\n"
                 + "e sabe que aquela chave abre a outra fechadura da porta do líder inimigo.\n"
@@ -245,17 +225,64 @@ public class Main {
 
         System.out.println("Ele percebe sua chegada e se levanta com um salto, apanhando seu machado de guerra de lâmina dupla.");
 
-        // TODO: jogador deve decidir se ataca ou espera
-        // TODO: iniciar loop de combate, dependendo da resposta do jogador, ele ataca primeiro
+        System.out.println("Você deseja:");
+        System.out.println("1 - Atacar");
+        System.out.println("2 - Esperar");
+        tipoOperacao = getInt();
+
+        Lider lider = new Lider();
+        if (tipoOperacao == 1) {
+            personagem.atacar(lider);
+        }
+        combate(personagem, lider);
 
         System.out.println("Você conseguiu!");
-        // TODO: exibir mensagem de vitória de acordo com a motivação do jogador:
-        // se vingança: Você obteve sua vingança. Você se ajoelha e cai no choro, invadido por uma sensação de alívio e felicidade. Você se vingou, tudo que sempre quis, está feito. Agora você pode seguir sua vida.
-        // se glória: O êxtase em que você se encontra não cabe dentro de si. Você se ajoelha e grita de alegria. A glória o aguarda, você a conquistou.
+
+        if (personagem.getMotivacao().equals(Motivacao.VINGANCA)) {
+
+            System.out.println("Você obteve sua vingança. Você se ajoelha e cai no choro, invadido por uma sensação de alívio e felicidade. "
+                    + "Você se vingou, tudo que sempre quis, está feito. Agora você pode seguir sua vida.");
+        }
+        if (personagem.getMotivacao().equals(Motivacao.GLORIA)) {
+            System.out.println("O êxtase em que você se encontra não cabe dentro de si. Você se ajoelha e grita de alegria. "
+                    + "A glória o aguarda, você a conquistou.");
+        }
 
         System.out.println("Você se levanta, olha para os prisioneiros, vai de um em um e os liberta,\n"
                 + "e todos vocês saem em direção à noite, retornando à cidade.\n"
                 + "Seu dever está cumprido.");
+    }
+
+    private static void combate(Jogador personagem, Inimigo inimigo) {
+        int tipoOperacao;
+        while (inimigo.getPontosSaude() > 0) {
+            inimigo.atacar(personagem);
+
+            if (personagem.getPontosSaude() <= 0) {
+                System.out.println("Você não estava preparado para a força do inimigo.");
+                if (personagem.getMotivacao().equals(Motivacao.VINGANCA)) {
+                    System.out.println("Não foi possível concluir sua vingança, e agora resta saber se alguém se vingará por você.");
+                } else if (personagem.getMotivacao().equals(Motivacao.GLORIA)) {
+                    if (personagem.getSexo().equals("F")) {
+                        System.out.println("A glória que buscavas não será sua, e a cidade aguarda por sua próxima heroína");
+                    } else {
+                        System.out.println("A glória que buscavas não será sua, e a cidade aguarda por seu próximo herói");
+                    }
+                }
+                System.exit(0);
+            }
+
+            System.out.println("1 - Atacar");
+            System.out.println("2 - Fugir");
+            tipoOperacao = getInt();
+
+            if (tipoOperacao == 2) {
+                System.out.println("Você não estava preparado para a força do inimigo, e decide fugir para que possa tentar novamente em uma próxima vez");
+                System.exit(0);
+            }
+            personagem.atacar(inimigo);
+        }
+        System.out.println("O inimigo não é páreo para o seu heroísmo, e jaz imóvel aos seus pés.");
     }
 
     private static Arma getArma() {
@@ -265,22 +292,6 @@ public class Main {
         }
         int opcaoArma = getInt() - 1;
         return Arma.values()[opcaoArma];
-    }
-
-    private void combate(/* parâmetros */) {
-		/*
-		Num combate, cada adversário possui um turno. Quem toma a iniciativa do início do combate possui a vantagem do primeiro turno. O inimigo sempre atacará, e o jogador pode escolher entre atacar e fugir (encerrando o jogo).
-
-		Cada ataque leva em consideração os pontos de ataque do personagem + ataque da arma + “rolamento de dado” (valor entre 1-20) para definir o tanto de dano que o atacante irá desferir no defensor. Essa quantidade de dano é subtraída pelos pontos de defesa do defensor. Se o rolamento de dado do atacante for 1, ele erra, e o defensor não sofre nenhum dano. Se o rolamento de dado do atacante for 20, ele conseguirá um acerto crítico, e o seu ataque ignora a defesa do adversário (ou seja, o dano que ele desfere é 100%, sem subtrair pelos pontos de defesa do defensor).
-
-		Quando o inimigo ataca, é realizado o cálculo do ataque e o jogo deve atualizar os pontos de vida do jogador, e exibir a mensagem: “O inimigo atacou! Você sofreu X de dano e agora possui Y pontos de vida.” substituindo X pela quantidade de dano do ataque e Y pela quantidade de pontos de vida atual do jogador. Se o inimigo errar, a mensagem exibida deve ser “O inimigo errou o ataque! Você não sofreu dano.”. Se o inimigo acertar um ataque crítico, a mensagem deve ser: "O inimigo acertou um ataque crítico! Você sofreu X de dano e agora possui Y pontos de vida.".
-		Caso o ataque do inimigo te leve a 0 pontos de vida, você morre, e a mensagem exibida deve ser “Você não estava preparado para a força do inimigo. {COMPLEMENTO DE ACORDO COM A MOTIVAÇÃO}”, substituindo o conteúdo entre chaves de acordo com a motivação do personagem selecionada no início do jogo. VINGANÇA: “Não foi possível concluir sua vingança, e agora resta saber se alguém se vingará por você.” GLÓRIA: “A glória que buscavas não será sua, e a cidade aguarda por seu(sua) próximo(a) herói(na).” (o gênero deve ser alterado para refletir o sexo do personagem escolhido pelo jogador no início do jogo). O jogo encerra quando o jogador morre.
-
-		Quando é a vez do jogador fazer uma ação, deve ser perguntado a ele se ele deseja atacar ou fugir. Se escolher fugir, o jogo deve exibir a mensagem “Você não estava preparado para a força do inimigo, e decide fugir para que possa tentar novamente em uma próxima vez.”.
-		Se escolher atacar, o jogo deve realizar o cálculo do ataque e atualizar os pontos de vida do inimigo. O jogo deve exibir a mensagem “Você atacou {COMPLEMENTO DA ARMA} e causou X de dano no inimigo!”, substituindo o conteúdo entre chaves de acordo com a arma do personagem. Espada, machado, martelo ou clava: “com sua/seu {ARMA}”. Arco+flecha ou besta+virote: “com seu/sua {ARMA}, a/o {MUNIÇÃO} atingiu”. Cajado: “com seu cajado, lançando uma bola de fogo”. Livro: “absorvendo energia do livro com uma mão e liberando com a outra”.
-		Se o jogador errar, a mensagem exibida deve ser “Você errou seu ataque! O inimigo não sofreu dano algum.”. Se o jogador acertar um ataque crítico, a mensagem deve ser: "Você acertou um ataque crítico! {COMPLEMENTO}” substituindo o conteúdo entre chaves pela mensagem de ataque normal.
-		Caso o inimigo morra com o seu ataque, o jogo deve exibir “O inimigo não é páreo para o seu heroísmo, e jaz imóvel aos seus pés.”
-		*/
     }
 
 }
