@@ -8,8 +8,8 @@ import br.com.techdive.batalhafinal.manuprinj.types.Motivacao;
 
 public class Mago extends Jogador {
 
-    public Mago(String nome, String sexo, Motivacao motivacao, Arma arma) {
-        super(19, 11, nome, sexo, motivacao, arma);
+    public Mago(String nome, String sexo, Arma arma) {
+        super(19, 11, nome, sexo, arma);
         if ((!arma.equals(Arma.CAJADO) && !arma.equals(Arma.LIVRO_MAGIAS))) {
             throw new IllegalArgumentException("Arma inválida!");
         }

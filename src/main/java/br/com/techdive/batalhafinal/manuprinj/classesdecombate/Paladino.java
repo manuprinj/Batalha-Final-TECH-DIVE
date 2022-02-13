@@ -8,8 +8,8 @@ import br.com.techdive.batalhafinal.manuprinj.types.Motivacao;
 
 public class Paladino extends Jogador {
 
-    public Paladino(String nome, String sexo, Motivacao motivacao, Arma arma) {
-        super(13, 18, nome, sexo, motivacao, arma);
+    public Paladino(String nome, String sexo, Arma arma) {
+        super(13, 18, nome, sexo, arma);
         if ((!arma.equals(Arma.MARTELO) && !arma.equals(Arma.CLAVA))) {
             throw new IllegalArgumentException("Arma inválida!");
         }

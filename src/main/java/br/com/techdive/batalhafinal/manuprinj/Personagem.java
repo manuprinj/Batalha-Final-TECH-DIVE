@@ -1,7 +1,7 @@
 package br.com.techdive.batalhafinal.manuprinj;
 
 
-abstract class Personagem {
+public abstract class Personagem {
 
     private int pontosSaude;
     private int pontosAtaque;
