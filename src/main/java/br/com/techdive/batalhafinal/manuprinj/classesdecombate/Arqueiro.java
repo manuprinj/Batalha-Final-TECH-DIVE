@@ -3,7 +3,6 @@ package br.com.techdive.batalhafinal.manuprinj.classesdecombate;
 
 import br.com.techdive.batalhafinal.manuprinj.Jogador;
 import br.com.techdive.batalhafinal.manuprinj.types.Arma;
-import br.com.techdive.batalhafinal.manuprinj.types.Motivacao;
 
 
 public class Arqueiro extends Jogador {
